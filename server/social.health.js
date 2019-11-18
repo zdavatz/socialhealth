@@ -53,6 +53,7 @@ log('Checking Hospitals', hospitals.length)
 // })
 
 //
+importData()
 stats()
 scrap()
 
@@ -68,7 +69,9 @@ var items = data.Envelope.Body.PARTNER.ITEM;
 // log(items[0])
 var dataSample = _.take(items, 5);
 // Items.remove({})
-SH.batchInsert = (data) => {
+
+
+function importData (data){
   log('===============')
   log('Importing starts')
   _.each(data, (item) => {
