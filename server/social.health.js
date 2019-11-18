@@ -53,7 +53,7 @@ log('Checking Hospitals', hospitals.length)
 // })
 
 //
-importData()
+
 stats()
 scrap()
 
@@ -70,6 +70,8 @@ var items = data.Envelope.Body.PARTNER.ITEM;
 var dataSample = _.take(items, 5);
 // Items.remove({})
 
+
+importData(items)
 
 function importData (data){
   log('===============')
