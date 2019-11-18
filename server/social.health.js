@@ -54,7 +54,7 @@ log('Checking Hospitals', hospitals.length)
 
 //
 stats()
-// scrap()
+scrap()
 
 
 
