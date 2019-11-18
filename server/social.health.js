@@ -115,6 +115,12 @@ async function scrap() {
     /**
      * 
      */
+
+    // Write the File after scrapping all data
+    if(hospitals.length == 0){
+      App.writeFile('/public/data.json',App.JSONReady(Items.find({'ROLE.TYPE': "Hosp",$or:[{youtube:{$ne:null}},{facebook:{$ne:null}},{twitter:{$ne:null}},{instagram:{$ne:null}},{linkedin:{$ne:null}}]}).fetch()))
+    }
+
     for (var i = 0; i < hospitals.length; i++) {
 
       var hospital = hospitals[i]["DESCR1"]
@@ -250,5 +256,5 @@ function stats() {
 
 
 
-  App.writeFile('/public/data.json',App.JSONReady(Items.find({'ROLE.TYPE': "Hosp",$or:[{youtube:{$ne:null}},{facebook:{$ne:null}},{twitter:{$ne:null}},{instagram:{$ne:null}},{linkedin:{$ne:null}}]}).fetch()))
+  
 }
