@@ -71,7 +71,7 @@ var dataSample = _.take(items, 5);
 // Items.remove({})
 
 
-importData(items)
+// importData(items)
 
 function importData (data){
   log('===============')
