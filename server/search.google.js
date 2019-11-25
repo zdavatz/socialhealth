@@ -9,20 +9,23 @@ import '../settings/keys.api'
 // console.log(SerpiKey)
 
 const GSR = require('google-search-results-nodejs')
+const client = new GSR.GoogleSearchResults(SerpiKey)
 
-let client = new GSR.GoogleSearchResults(SerpiKey)
 
-var parameter = {
-    q: "Coffee",
-    location: "Austin, Texas, United States",
-    hl: "en",
-    gl: "us",
-    google_domain: "google.com",
-};
 
-var callback = function(data) {
-  console.log(data)
+function searchGoogle(keyword) {
+
+    var parameter = {
+        q: keyword,
+        // location: "Austin, Texas, United States",
+        // hl: "en",
+        // gl: "us",
+        google_domain: "google.com",
+    };
+    client.json(parameter, (data) => {
+        console.log(data)
+    })
 }
 
-// Show result as JSON
-client.json(parameter, callback)
+
+searchGoogle('Zeno;Davatz;OpenSource, Github, Software')

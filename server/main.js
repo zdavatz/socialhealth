@@ -9,7 +9,7 @@ import './utili/lib.js'
 
 log = console.log;
 
-// import './search.google.js'
+import './search.google.js'
 
 
 
