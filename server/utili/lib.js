@@ -10,7 +10,10 @@
  * Imports
  */
 import YAML from 'yaml'
+import Papa from 'papaparse'
+import _ from 'lodash'
 const fs = require('fs')
+
 
 /**
  * Collection
@@ -57,9 +60,9 @@ App.getJSON = (file) => {
  * App.prepareJSON
  */
 
- App.JSONReady = (data)=>{
-   return JSON.stringify(data)
- }
+App.JSONReady = (data) => {
+  return JSON.stringify(data)
+}
 /**
  * Write to file
  * Write file to Disk
@@ -135,8 +138,7 @@ App.itemInsert = (doc, field, type) => {
 /**
  * App.itemUpdate
  */
-App.itemUpdate = (col, field, data) => {
-}
+App.itemUpdate = (col, field, data) => {}
 /**
  * App.fetch
  * => Return JSON array of ITEMS
@@ -146,6 +148,44 @@ App.fetch = (project) => {
     project: project
   }).fetch()
 }
+
+/**
+ * 
+ */
+
+App.importCSV = (file) => {
+  var data = Assets.getText(file)
+  var data = Papa.parse(data, {
+    header: true
+  });
+  if (data.errors.length) {
+    log('err')
+    throw new Meteor.Error('importCSV', data.errors[0].type);
+  } else {
+    return data.data;
+  }
+}
+
+
+
+/**
+ * insertItemsBatch
+ * @param {*} data 
+ * @param {*} project 
+ */
+
+App.insertItemsBatch = (data, project) => {
+  if (!data || !_.isArray(data)) {
+    log('data error')
+  }
+
+  _.each(data, (item) => {
+    log(item)
+  })
+}
+
+
+
 /**
  * Exports
  */

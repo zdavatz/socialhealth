@@ -10,6 +10,9 @@
   "dependencies": {
     "@babel/runtime": "^7.3.4",
     "cheerio": "^1.0.0-rc.3",
+    "google": "^2.1.0",
+    "google-search": "0.0.5",
+    "google-search-results-nodejs": "^1.3.0",
     "google-search-scraper": "^0.1.0",
     "lodash": "^4.17.15",
     "meteor-node-stubs": "^0.4.1",

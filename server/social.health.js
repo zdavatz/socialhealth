@@ -5,6 +5,23 @@ import _ from 'lodash'
 import './utili/lib.js'
 const puppeteer = require('puppeteer');
 const cheerio = require('cheerio');
+
+const GSR = require('google-search-results-nodejs')
+
+
+import '../settings/keys.api'
+
+
+
+/**
+ * 
+ */
+
+
+
+/**
+ * 
+ */
 SH = {}
 SH.isTest = true;
 SH.debug = true;
