@@ -35,7 +35,7 @@ Template.socialHealth.events({
       keywords: $('#keywords').val()
     }
 
-    if(!searchEle.name || !searchEle.surname || !searchEle.keywords){
+    if(!searchEle.name || !searchEle.surname){
       alert('Search keywords are missing')
       return
     }
