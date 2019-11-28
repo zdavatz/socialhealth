@@ -23,7 +23,7 @@ Template.socialHealth.onCreated(function () {
  */
 
 Template.socialHealth.events({
-  'click .search'(event, instance) {
+  'click .search, submit #search'(event, instance) {
     event.preventDefault()
 
     
