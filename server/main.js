@@ -4,7 +4,7 @@ import {
 
 // import './social.health.js'
 import _ from 'lodash'
-
+import './utili/social.health.lib.js'
 import './utili/lib.js'
 
 log = console.log;
@@ -36,9 +36,10 @@ Meteor.methods({
     search(obj){
         
         var item;
+        // Dropped
         var keywordsArr = getKeywords(obj.keywords)
 
-        obj.queries = queryCreate(obj.fullname , keywordsArr)
+        obj.queries = queryCreate(obj.fullname , obj.keywords)
 
 
         log(obj)
@@ -50,10 +51,6 @@ Meteor.methods({
 
         searchItem(itemId,obj.queries)
 
-        // Perform Search 
-
-        // Return the results 
-        
 
         log('search method: ',obj,itemId)
 
@@ -77,6 +74,7 @@ Meteor.methods({
  */
 
 function getKeywords(keywords){
+    var keywords = keywords.toLowerCase()
     var keywords = keywords.replace(/\s/g, '');
     var keywords = keywords.split(',');
     log('keywords',keywords)
@@ -90,10 +88,28 @@ function getKeywords(keywords){
  */
 function queryCreate(name,keywordsArr){
     var searchKeywords = []
-    _.each(keywordsArr,(keyword)=>{
-        var query = name + ' ' + keyword
-        searchKeywords.push({keyword:keyword,query:query})
-    })
+
+
+
+    for (var p = 0; p < SH.accounts.length; p++) {
+
+        var query = name + " " + keywordsArr + " " + SH.keyword[p]
+
+        var query = {
+            keyword : SH.accounts[p],
+            query: query,
+            
+        }
+        searchKeywords.push(query)
+
+    }
+
+    // log('Search keywords',searchKeywords)
+
+    // _.each(keywordsArr,(keyword)=>{
+    //     var query = name + ' ' + keyword
+    //     searchKeywords.push({keyword:keyword,query:query})
+    // })
     return searchKeywords
 }
 
@@ -103,6 +119,9 @@ function queryCreate(name,keywordsArr){
  */
  function searchItem(itemId,queries){
 
+
+
+    // Loop every Query => for Social Media Links
     _.each(queries,(query)=>{
         log('searching',query.query)
         Search.search(itemId,query)

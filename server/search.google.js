@@ -73,7 +73,7 @@ Search.search = (id,query)=>{
  * } keyword 
  */
 
-log('results',Results.find().fetch())
+// log('results',Results.find().fetch())
 /**
  * 
  * Draft

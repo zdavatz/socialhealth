@@ -7,6 +7,9 @@
  */
 
 
+SH = {}
+SH.accounts = ["twitter", 'facebook', 'linkedin', 'youtube', 'instagram']
+SH.keyword = ['twitter', 'facebook', 'linkedin', 'youtube channel', 'instagram']
 
 Regex = {
     twitter: /http(?:s)?:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+)/,
@@ -31,3 +34,4 @@ Regex.txt.linkedin = 'linkedin'
 
 
 module.exports = Regex;
+module.exports = SH;
