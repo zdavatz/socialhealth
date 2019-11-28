@@ -13,38 +13,62 @@
                 <div class="column is-10">
                     <div class="field has-addons">
                         <p class="control">
-                            <input class="input" type="text" placeholder="Name">
+                            <label class="label">Name</label>
+                            <input id="name" class="input" type="text" placeholder="Name">
                         </p>
                         <p class="control is-expanded">
-                            <input class="input" type="text" placeholder="Surname">
+                            <label class="label">Surname</label>
+                            <input id="surname" class="input" type="text" placeholder="Surname">
                         </p>
                         <p class="control is-expanded">
-                            <input class="input" type="text" placeholder="Keyword: seperated by comma">
+                            <label class="label">Keyword</label>
+                            <input id="keywords" class="input" type="text" placeholder="Keyword: seperated by comma">
                         </p>
                         <p class="control">
-                            <a class="button">
+                            <label class="label">.</label>
+                            <button type="submit" class="button search">
                                 Search
-                            </a>
+                            </button>
                         </p>
                     </div>
                 </div>
             </div>
 
-            <hr/>
+            <hr />
 
+            {{#if results}}
             <div class="columns is-multiline">
                 <div class="column is-6">
-                    Results
+                    <h3 class="subtitle is-4">Results</h3>
+                    <hr/>
+                    {{#each results}}
 
+                    <p>
+                        {{keyword}} <br/>
+                        <a href="{{link}}">{{title}}</a> <br/>
+                        <small>{{link}}</small>
+                    </p>
+                    <br/>
+                    {{/each}}
 
                 </div>
                 <div class="column is-6">
-                    Console
-                    <textarea class="textarea" rows="20">
+                    <h3 class="subtitle is-4">Console</h3>
+                    <hr/>
+                   
+                    <pre>
+                        {{resultsJSON}}
+                    </pre>
+                  
+                    <!-- <textarea class="textarea" rows="20"> -->
 
-                        </textarea>
+                        <!-- </textarea> -->
                 </div>
             </div>
+
+            {{/if}}
+
+
         </div>
 
     </section>

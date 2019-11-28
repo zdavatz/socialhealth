@@ -18,7 +18,9 @@ const fs = require('fs')
 /**
  * Collection
  */
-Items = new Mongo.Collection('items')
+Items = new Mongo.Collection('items');
+Results = new Mongo.Collection('results');
+
 /**
  * 
  */
@@ -95,18 +97,20 @@ App.isFileExists = (filePath) => {
  */
 /**
  * App.batchColInsert(Collection, Data "Array", field "Project")
+ * @param field
  */
-App.batchColInsert = (col, data, field) => {
-  if (!data || !data.length || !field || !global[col]) {
+App.batchColInsert = (col, data, project) => {
+  if (!data || !data.length || !project || !global[col]) {
     console.log('DB:batchInsert Err', col)
     return;
   }
   _.each(data, (item) => {
     let isExist = global[col].findOne({
-      [field]: item[field]
+      [project]: item[project]
     })
     if (!isExist) {
-      console.log('DB.batchColInsert: Success,', item[field], 'Inserted')
+      item.project = project
+      console.log('DB.batchColInsert: Success,', item[project], 'Inserted')
       global[col].insert(item)
     } else {
       console.log('DB.batchColInsert: Success[Exists], Doc', item[field], 'Exists')

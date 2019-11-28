@@ -3,21 +3,72 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
 import './search.html'
+log = console.log
 
-Template.hello.onCreated(function helloOnCreated() {
+Items = new Mongo.Collection('items');
+Results = new Mongo.Collection('results');
+
+Template.socialHealth.onCreated(function () {
   // counter starts at 0
-  this.counter = new ReactiveVar(0);
-});
 
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
+  Tracker.autorun(function(){
+    var operation = App.getSetting('operationId')
+    log(operation)
+    Meteor.subscribe('results',operation)
+  })
+
+});
+/**
+ * 
+ */
+
+Template.socialHealth.events({
+  'click .search'(event, instance) {
+    event.preventDefault()
+
+    
+
+    var searchEle = {
+      name: $('#name').val(),
+      surname: $('#surname').val(),
+      fullname: $('#name').val() + ' ' + $('#surname').val(),
+      keywords: $('#keywords').val()
+    }
+
+    if(!searchEle.name || !searchEle.surname || !searchEle.keywords){
+      alert('Search keywords are missing')
+      return
+    }
+    Meteor.call('search',searchEle,(err,results)=>{
+      console.log(err,results)
+      if(results){
+        App.setSetting({operationId: results})
+      }
+    })
+
   },
 });
 
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
+
+
+/**
+ * 
+*/
+
+
+Template.socialHealth.helpers({
+  results() {
+    return Results.find().fetch()
   },
+  resultsJSON(){
+    var r = Results.find().fetch()
+    var r = JSON.stringify(r, undefined, 2) 
+    if(r.length){
+      return r;
+    }else{
+      return null
+    }
+    
+  }
 });
+

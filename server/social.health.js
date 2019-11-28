@@ -13,6 +13,9 @@ import '../settings/keys.api'
 
 
 
+
+
+
 /**
  * 
  */
@@ -71,8 +74,8 @@ log('Checking Hospitals', hospitals.length)
 
 //
 
-stats()
-scrap()
+// stats()
+// scrap()
 
 
 
