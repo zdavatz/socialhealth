@@ -8,8 +8,8 @@
 
 
 SH = {}
-SH.accounts = ["twitter", 'facebook', 'linkedin', 'youtube', 'instagram']
-SH.keyword = ['twitter', 'facebook', 'linkedin', 'youtube channel', 'instagram']
+SH.accounts = ["twitter", 'facebook', 'linkedin', 'youtube', 'instagram', 'github']
+SH.keyword = ['twitter', 'facebook', 'linkedin', 'youtube channel', 'instagram', 'github']
 
 Regex = {
     twitter: /http(?:s)?:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+)/,
@@ -28,6 +28,7 @@ Regex.txt.twitter = 'twitter.com'
 Regex.txt.instagram = 'instagram.com'
 Regex.txt.youtube = 'youtube.com'
 Regex.txt.linkedin = 'linkedin'
+Regex.txt.github = 'github'
 
 
 

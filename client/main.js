@@ -12,9 +12,13 @@ Template.socialHealth.onCreated(function () {
   // counter starts at 0
 
   Tracker.autorun(function(){
+    // var operation = Session.get('operationId')
     var operation = App.getSetting('operationId')
-    log(operation)
+    // if(!operation){
+    //   return
+    // }
     Meteor.subscribe('results',operation)
+    log(Results.find().fetch())
   })
 
 });
@@ -27,13 +31,18 @@ Template.socialHealth.events({
     event.preventDefault()
 
     
-
+    var isChecked = $('#isAPI').checked
+    // App.setSetting:
+    // log(isChecked)
     var searchEle = {
       name: $('#name').val(),
       surname: $('#surname').val(),
       fullname: $('#name').val() + ' ' + $('#surname').val(),
-      keywords: $('#keywords').val()
+      keywords: $('#keywords').val(),
+      isAPI: App.getSetting('isAPI')
     }
+
+    log(searchEle)
 
     if(!searchEle.name || !searchEle.surname){
       alert('Search keywords are missing')
@@ -43,10 +52,18 @@ Template.socialHealth.events({
       console.log(err,results)
       if(results){
         App.setSetting({operationId: results})
+        Session.set({operationId: results})
       }
     })
 
   },
+  'click #isAPI'(e){
+    var isAPI = $(e.currentTarget).is(":checked")
+    log('checked',isAPI)
+    // if(isChecked){
+      App.setSetting({isAPI:isAPI})
+    // }
+  }
 });
 
 
