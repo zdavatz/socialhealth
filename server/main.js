@@ -5,19 +5,30 @@ import {
 import _ from 'lodash'
 import './utili/social.health.lib.js'
 import './utili/lib.js'
+// KEYS
+import '../settings/keys.api';
+
+
 log = console.log;
 import './search.google.js'
 log('-----------Social Health-------------')
 /**
  * Metehor Methods
  */
+
 Meteor.methods({
     search(obj) {
         // var keywordsArr = getKeywords(obj.keywords)
         obj.queries = queryCreate(obj.fullname, obj.keywords)
+        obj.createAt = new Date();
         var itemId = Items.insert(obj)
         if(obj.isAPI){
             log('===== USING API =====')
+            if(!SerpiKey){
+                log('SerpiKey is not found')
+                throw new Meteor.Error('SERPI API Key is missing')
+                return
+            }
             searchItem(itemId,obj.queries)
         }else{
             log('===== USING Puppeteer =====')
@@ -29,16 +40,39 @@ Meteor.methods({
 })
 /**
  * 
- * Publish
+ * Publish: Result
  */
 Meteor.publish('results', function (id) {
     var res= Results.find({item:id}).count()
-    log('Publish: ', id)
+    log('Publish: #Results ', id)
     return Results.find({
         item: id,
         valid: true
     })
 })
+
+/**
+ * 
+ * Publish: History 
+ */
+
+ Meteor.publish('history',function(){
+    var ids = Items.find().fetch()
+    var ids = _.map(ids,(id)=>{
+        return id._id
+    })
+    log('ids',ids)
+     var results = Results.find({item:{$in:ids}})
+     return results;
+ })
+
+ //
+
+//  Results.remove({})
+// Items.remove({})
+
+
+log(Results.find().count())
 /**
  * 
  * @param {*} keywords 
@@ -65,11 +99,6 @@ function queryCreate(name, keywordsArr) {
         }
         searchKeywords.push(query)
     }
-    // log('Search keywords',searchKeywords)
-    // _.each(keywordsArr,(keyword)=>{
-    //     var query = name + ' ' + keyword
-    //     searchKeywords.push({keyword:keyword,query:query})
-    // })
     return searchKeywords
 }
 /**

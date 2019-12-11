@@ -48,6 +48,12 @@ Search.search = (id,query)=>{
         first.query = query.query
         first.isSerp = true;
         first.isPub = false;
+        first.createdAt = new Date();
+
+        //
+        var itemObj = getItem(id)
+        log(itemObj)
+        //
         log(first)
         if(Regex.txt[query.keyword] && first.link.search(Regex.txt[query.keyword]) > -1){
             first.valid = true;
@@ -168,6 +174,7 @@ async function pupSearch(id,queries){
               first.valid = true;
               first.isPub = true;
               first.isSerp = false;
+              first.createdAt = new Date();
               
               log('Insert Before: Validation ',first)
               Results.insert(first, function(err){
@@ -188,6 +195,17 @@ async function pupSearch(id,queries){
       }
     log('Async Scrap',id,queries)
 }
+
+
+
+/**
+ * 
+ * @param {*} keyword 
+ */
+
+ function getItem(id){
+     return Items.findOne(id)
+ }
 /**
  * 
  * ==============================================================================================

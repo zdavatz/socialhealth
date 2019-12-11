@@ -1,6 +1,9 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
+_ = lodash;
+
+
 import './main.html';
 import './search.html'
 log = console.log
@@ -11,6 +14,8 @@ Results = new Mongo.Collection('results');
 Template.socialHealth.onCreated(function () {
   // counter starts at 0
 
+  Meteor.subscribe('history')
+
   Tracker.autorun(function(){
     // var operation = Session.get('operationId')
     var operation = App.getSetting('operationId')
@@ -18,10 +23,11 @@ Template.socialHealth.onCreated(function () {
     //   return
     // }
     Meteor.subscribe('results',operation)
-    log(Results.find().fetch())
   })
 
 });
+
+
 /**
  * 
  */
@@ -50,6 +56,9 @@ Template.socialHealth.events({
     }
     Meteor.call('search',searchEle,(err,results)=>{
       console.log(err,results)
+      if(err){
+        alert('SERPI api key is missing')
+      }
       if(results){
         App.setSetting({operationId: results})
         Session.set({operationId: results})
@@ -63,7 +72,8 @@ Template.socialHealth.events({
     // if(isChecked){
       App.setSetting({isAPI:isAPI})
     // }
-  }
+  },
+  
 });
 
 
@@ -75,7 +85,7 @@ Template.socialHealth.events({
 
 Template.socialHealth.helpers({
   results() {
-    return Results.find().fetch()
+    return Results.find({item:App.getSetting('operationId')}).fetch()
   },
   resultsJSON(){
     var r = Results.find().fetch()
@@ -86,6 +96,27 @@ Template.socialHealth.helpers({
       return null
     }
     
+  },
+  /**
+   * isHistory: Toggle
+   */
+  isHistory(){
+    return App.getSetting('history')
+  },
+  /**
+   * History: results
+   */
+  history(){
+
+    var d = []
+    var r = Results.find({item:{$nin:[App.setSetting('operationId')]}}).fetch()
+
+    var r = _.groupBy(r,'item')
+    var arr = _.map(r,(item)=>{
+      return item
+    });
+    log('r',r,arr)
+    return arr
   }
 });
 

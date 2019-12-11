@@ -1,11 +1,6 @@
 <template name="socialHealth">
     <section class="section">
-
-
-
-
         <div class="container">
-
             <div class="columns is-multiline">
                 <div class="column is-12">
                     <h1 class="title">Social Health Search</h1>
@@ -30,9 +25,6 @@
                                 Search
                             </button>
                         </p>
-
-
-
                     </form>
                 </div>
                 <!--  -->
@@ -45,16 +37,16 @@
                     </p>
                 </div>
             </div>
-
             <hr />
-
-            {{#if results}}
             <div class="columns is-multiline">
                 <div class="column is-6">
+                    <div class="column is-12" style="height: 80px;">
+                        <br /><br />
+                    </div>
                     <h3 class="subtitle is-4">Results</h3>
                     <hr />
+                    {{#if results}}
                     {{#each results}}
-
                     <p>
                         {{keyword}} <br />
                         <a href="{{link}}" target="_blank">{{title}}</a> <br />
@@ -62,27 +54,49 @@
                     </p>
                     <br />
                     {{/each}}
-
+                    {{else}}
+                    <p>There is no results</p>
+                    {{/if}}
                 </div>
                 <div class="column is-6">
+                    <div class="column is-12" style="height: 80px;">
+                        <a href="#" class="button setSettings" data-settings="history:true">History</a>
+                        <a href="#" class="button setSettings" data-settings="history:false">Console</a>
+                    </div>
+                    {{#if getSetting 'history'}}
+                    <h3 class="subtitle is-4">History</h3>
+                    <hr />
+                    {{#if history}}
+                    <div class="">
+
+                        {{#each history}}
+                        <p class="notification is-light">
+                            
+                        {{#each this}}
+                        <p class="">
+                            <a href="{{link}}" target="_blank">{{title}}</a> <br />
+                            <small>{{link}}</small>
+                        </p>
+                        {{/each}}
+                        </p>
+                        {{/each}}
+                    </div>
+                    {{else}}
+                    <p class="">
+                        No search history
+                    </p>
+                    {{/if}}
+                    {{else}}
                     <h3 class="subtitle is-4">Console</h3>
                     <hr />
-
                     <pre>
                         {{resultsJSON}}
                     </pre>
-
+                    {{/if}}
                     <!-- <textarea class="textarea" rows="20"> -->
-
                     <!-- </textarea> -->
                 </div>
             </div>
-
-            {{/if}}
-
-
         </div>
-
     </section>
-
 </template>
