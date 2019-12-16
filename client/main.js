@@ -109,7 +109,7 @@ Template.socialHealth.helpers({
   history(){
 
     var d = []
-    var r = Results.find({item:{$nin:[App.setSetting('operationId')]}}).fetch()
+    var r = Results.find({item:{$nin:[App.setSetting('operationId')]}},{sort:{createdAt:-1}}).fetch()
 
     var r = _.groupBy(r,'item')
     var arr = _.map(r,(item)=>{
