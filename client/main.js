@@ -96,7 +96,7 @@ Template.socialHealth.helpers({
     return Items.find({},{sort:{createdAt:-1}}).fetch()
   },
   getResults(id){
-    var r = Results.find({item:id})
+    var r = Results.find({item:id}).fetch()
     return r
   }
 });
