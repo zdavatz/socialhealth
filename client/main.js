@@ -84,7 +84,7 @@ Template.socialHealth.helpers({
    * History: results
    */
   history(){
-    var d = []
+    var data = []
     var r = Results.find({item:{$nin:[App.setSetting('operationId')]}},{sort:{createdAt:-1}}).fetch()
     var r = _.groupBy(r,'item')
     var arr = _.map(r,(item)=>{
@@ -94,12 +94,12 @@ Template.socialHealth.helpers({
     return arr
   },
   historyItems(){
-    var items = Items.find({},{sort:{createdAt:-1}}).fetch()
+    var items = Items.find({},{sort:{createdAt:-1}})
     return items
   },
   historyResults(id){
-    log('Loading results for:', id)
-    return Results.find({item:id}).fetch()
+    log('Loading results for', id)
+    return Results.find({item:id})
   },
   getItemDataHelper(id, field){
     var item = Items.findOne({_id:id});
