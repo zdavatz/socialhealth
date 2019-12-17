@@ -66,14 +66,13 @@
                     {{#if getSetting 'history'}}
                     <h3 class="subtitle is-4">History</h3>
                     <hr />
-                    {{#if h}}
+                    {{#if historyItems}}
                     {{#each historyItems}}
                     <h1>
                         <small><strong>{{fullname}} {{keywords}} </strong> -
                             {{moFormat createAt 'dddd, MMMM Do YYYY, h:mm:ss a'}} </small>
                     </h1>
-                    {{#each getResults _id}}
-                    <!-- {{this}} -->
+                    {{#each historyResults _id}}
                     <p class="">
                         <a href="{{link}}" target="_blank">{{title}}</a> <br />
                         <small>{{link}}</small>
@@ -82,15 +81,18 @@
                     <hr />
                     {{/each}}
                     {{/if}}
-                    {{#if history}}
+
+                    <!--  -->
+                    {{#if historyS}}
                     <div class="">
                         {{#each history}}
 
                         <p class="notification is-light">
                            
 
-                            <strong>{{getItemDataHelper history.[0].[0].item 'fullname' }}</strong>
-                            <small> {{getItemDataHelper history.[0].[0].item 'createAt'}}</small>
+                            {{this.[0]}}
+                            <!--  <strong>{{getItemDataHelper [0].[0].item 'fullname' }}</strong> --> 
+                            <!-- <small> {{getItemDataHelper [0].[0].item 'createAt'}}</small> -->
 
                             <hr/>
                             {{#each this}}

@@ -90,10 +90,16 @@ Template.socialHealth.helpers({
     var arr = _.map(r,(item)=>{
       return item
     });
+    log(arr)
     return arr
   },
   historyItems(){
-    return Items.find({},{sort:{createdAt:-1}}).fetch()
+    var items = Items.find({},{sort:{createdAt:-1}}).fetch()
+    return items
+  },
+  historyResults(id){
+    log('Loading results for:', id)
+    return Results.find({item:id}).fetch()
   },
   getItemDataHelper(id, field){
     var item = Items.findOne({_id:id});
