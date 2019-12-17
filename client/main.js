@@ -95,8 +95,12 @@ Template.socialHealth.helpers({
   historyItems(){
     return Items.find({},{sort:{createdAt:-1}}).fetch()
   },
-  getResults(id){
-    var r = Results.find({item:id}).fetch()
-    return r
+  getItemDataHelper(id, field){
+    var item = Items.findOne({_id:id});
+    return item[field]
+
   }
 });
+
+
+

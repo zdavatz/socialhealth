@@ -43,6 +43,9 @@ Meteor.methods({
  * Publish: Result
  */
 Meteor.publish('results', function (id) {
+    if(!id){
+        return
+    }
     var res= Results.find({item:id}).count()
     // log('Publish: #Results ', id)
     return Results.find({
@@ -57,7 +60,7 @@ Meteor.publish('results', function (id) {
  */
 
  Meteor.publish(null,function(){
-    var ids = Items.find({},{limit:40,sort:{createAt:-1}}).fetch()
+    var ids = Items.find({},{sort:{createAt:-1}}).fetch()
     var ids = _.map(ids,(id)=>{
         return id._id
     })
