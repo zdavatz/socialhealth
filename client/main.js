@@ -89,8 +89,11 @@ Template.socialHealth.helpers({
       }
       log(i, key)
       var item = Items.findOne(key)
-      item.results = i;
-      data.push(item)
+      if(item){
+        item.results = i;
+        data.push(item)
+      }
+
     })
 
     log('Rendered data',data)
