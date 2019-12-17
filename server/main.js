@@ -36,6 +36,15 @@ Meteor.methods({
         }
         log('Searchi Method: Init', itemId)
         return itemId;
+    },
+    stats(){
+
+        var stats = {}
+        stats.profiles = Results.find().count()
+        stats.items = Items.find().count()
+
+        return stats
+
     }
 })
 /**

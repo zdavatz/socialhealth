@@ -3,7 +3,12 @@
         <div class="container">
             <div class="columns is-multiline">
                 <div class="column is-12">
-                    <h1 class="title">Social Health Search</h1>
+                    <span class="title">Social Health Search</span>
+
+                    <span class="is-pulled-right">  
+                        Searches: <span class="tag is-primary">{{setting 'stats' 'items'}}</span>
+                        Profiles: <span class="tag is-info">{{setting 'stats' 'profiles'}}</span>
+                </span>
                 </div>
                 <div class="column is-10">
                     <form class="field has-addons" id="search">
@@ -68,9 +73,10 @@
                     <hr />
                     <!--  -->
                     {{#if history}}
-                    <div class="">
+                    <ul class="">
                         {{#each history}}
-                        <p class="notification is-light">
+                        <ol class="notification is-light">
+                            {{@index}}
                             <strong>{{fullname}}</strong><br/>
                             <small>{{ moFormat this.createAt 'dddd, MMMM Do YYYY, h:mm:ss a'}}</small>
                             <br/><br/>
@@ -80,9 +86,9 @@
                                 <small>{{link}}</small>
                             </p>
                             {{/each}}
-                        </p>
+                        </ol>
                         {{/each}}
-                    </div>
+                    </ul>
                     {{else}}
                     <p class="">
                         No search history

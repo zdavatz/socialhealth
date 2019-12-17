@@ -14,6 +14,13 @@ Template.socialHealth.onCreated(function () {
   Tracker.autorun(function(){
     var operation = App.getSetting('operationId')
     Meteor.subscribe('results',operation)
+  });
+
+  Meteor.call('stats',(err,data)=>{
+    log('stats', data)
+    if(data){
+      App.setSetting({stats:data})
+    }
   })
 });
 /**
@@ -81,7 +88,7 @@ Template.socialHealth.helpers({
    */
   history(){
     var data = []
-    var r = Results.find({item:{$nin:[App.setSetting('operationId')]}},{sort:{createdAt:-1}}).fetch()
+    var r = Results.find({},{sort:{createdAt:-1}}).fetch()
     var r = _.groupBy(r,'item')
     _.each(r, (i,key)=>{
       if(!i || !key){
