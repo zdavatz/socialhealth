@@ -1,21 +1,14 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-
 _ = lodash;
-
-
 import './main.html';
 import './search.html'
 log = console.log
-
 Items = new Mongo.Collection('items');
 Results = new Mongo.Collection('results');
-
 Template.socialHealth.onCreated(function () {
   // counter starts at 0
-
   Meteor.subscribe('history')
-
   Tracker.autorun(function(){
     // var operation = Session.get('operationId')
     var operation = App.getSetting('operationId')
@@ -24,19 +17,13 @@ Template.socialHealth.onCreated(function () {
     // }
     Meteor.subscribe('results',operation)
   })
-
 });
-
-
 /**
  * 
  */
-
 Template.socialHealth.events({
   'click .search, submit #search'(event, instance) {
     event.preventDefault()
-
-    
     var isChecked = $('#isAPI').checked
     // App.setSetting:
     // log(isChecked)
@@ -47,9 +34,7 @@ Template.socialHealth.events({
       keywords: $('#keywords').val(),
       isAPI: App.getSetting('isAPI')
     }
-
     log(searchEle)
-
     if(!searchEle.name || !searchEle.surname){
       alert('Search keywords are missing')
       return
@@ -64,7 +49,6 @@ Template.socialHealth.events({
         Session.set({operationId: results})
       }
     })
-
   },
   'click #isAPI'(e){
     var isAPI = $(e.currentTarget).is(":checked")
@@ -73,16 +57,10 @@ Template.socialHealth.events({
       App.setSetting({isAPI:isAPI})
     // }
   },
-  
 });
-
-
-
 /**
  * 
 */
-
-
 Template.socialHealth.helpers({
   results() {
     return Results.find({item:App.getSetting('operationId')}).fetch()
@@ -95,7 +73,6 @@ Template.socialHealth.helpers({
     }else{
       return null
     }
-    
   },
   /**
    * isHistory: Toggle
@@ -107,16 +84,19 @@ Template.socialHealth.helpers({
    * History: results
    */
   history(){
-
     var d = []
     var r = Results.find({item:{$nin:[App.setSetting('operationId')]}},{sort:{createdAt:-1}}).fetch()
-
     var r = _.groupBy(r,'item')
     var arr = _.map(r,(item)=>{
       return item
     });
-    log('r',r,arr)
     return arr
+  },
+  historyItems(){
+    return Items.find({},{sort:{createdAt:-1}}).fetch()
+  },
+  getResults(id){
+    var r = Results.find({item:id})
+    return r
   }
 });
-

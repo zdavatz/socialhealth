@@ -66,12 +66,34 @@
                     {{#if getSetting 'history'}}
                     <h3 class="subtitle is-4">History</h3>
                     <hr />
-                    {{#if history}}
+
+
+                    {{#each historyItems}}
+                    <h1>
+                        <small><strong>{{moFormat createAt 'HH:mm:ss'}}</strong></small>
+                    </h1>
+       
+                    
+                    <!-- {{getResults _id}} -->
+
+                        {{#each getResults _id}}
+                            <!-- {{this}} -->
+                            <p class="">
+                                <a href="{{link}}" target="_blank">{{title}}</a> <br />
+                                <small>{{link}}</small>
+                            </p>
+
+                        {{/each}}
+                    <hr/>
+                    {{/each}}
+
+
+                    {{#if historyx}}
                     <div class="">
 
                         {{#each history}}
                         <p class="notification is-light">
-                            
+                        <!-- {{this.0}} -->
                         {{#each this}}
                         <p class="">
                             <a href="{{link}}" target="_blank">{{title}}</a> <br />
@@ -83,7 +105,7 @@
                     </div>
                     {{else}}
                     <p class="">
-                        No search history
+                        <!-- No search history -->
                     </p>
                     {{/if}}
                     {{else}}
