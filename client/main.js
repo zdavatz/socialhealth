@@ -87,25 +87,18 @@ Template.socialHealth.helpers({
     var data = []
     var r = Results.find({item:{$nin:[App.setSetting('operationId')]}},{sort:{createdAt:-1}}).fetch()
     var r = _.groupBy(r,'item')
-    var arr = _.map(r,(item)=>{
-      return item
-    });
-    log(arr)
-    return arr
-  },
-  historyItems(){
-    var items = Items.find({},{sort:{createdAt:-1}})
-    return items
-  },
-  historyResults(id){
-    log('Loading results for', id)
-    return Results.find({item:id})
-  },
-  getItemDataHelper(id, field){
-    var item = Items.findOne({_id:id});
-    return item[field]
 
+    _.each(r, (i,key)=>{
+      log(i, key)
+      var item = Items.findOne(key)
+      item.results = i;
+      data.push(item)
+    })
+
+    log(data)
+    return data
   }
+
 });
 
 

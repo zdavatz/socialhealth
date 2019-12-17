@@ -66,36 +66,15 @@
                     {{#if getSetting 'history'}}
                     <h3 class="subtitle is-4">History</h3>
                     <hr />
-                    {{#if historyItems}}
-                    {{#each historyItems}}
-                    <h1>
-                        <small><strong>{{fullname}} {{keywords}} </strong> -
-                            {{moFormat createAt 'dddd, MMMM Do YYYY, h:mm:ss a'}} </small>
-                    </h1>
-                    {{#each historyResults _id}}
-                    <p class="">
-                        <a href="{{link}}" target="_blank">{{title}}</a> <br />
-                        <small>{{link}}</small>
-                    </p>
-                    {{/each}}
-                    <hr />
-                    {{/each}}
-                    {{/if}}
-
                     <!--  -->
-                    {{#if historyS}}
+                    {{#if history}}
                     <div class="">
                         {{#each history}}
-
                         <p class="notification is-light">
-                           
-
-                            {{this.[0]}}
-                            <!--  <strong>{{getItemDataHelper [0].[0].item 'fullname' }}</strong> --> 
-                            <!-- <small> {{getItemDataHelper [0].[0].item 'createAt'}}</small> -->
-
-                            <hr/>
-                            {{#each this}}
+                            <strong>{{fullname}}</strong><br/>
+                            <small>{{ moFormat this.createAt 'dddd, MMMM Do YYYY, h:mm:ss a'}}</small>
+                            <br/><br/>
+                            {{#each this.results}}
                             <p class="">
                                 <a href="{{link}}" target="_blank">{{title}}</a> <br />
                                 <small>{{link}}</small>
@@ -106,7 +85,7 @@
                     </div>
                     {{else}}
                     <p class="">
-                        <!-- No search history -->
+                        No search history
                     </p>
                     {{/if}}
                     {{else}}
