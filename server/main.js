@@ -44,7 +44,7 @@ Meteor.methods({
  */
 Meteor.publish('results', function (id) {
     var res= Results.find({item:id}).count()
-    log('Publish: #Results ', id)
+    // log('Publish: #Results ', id)
     return Results.find({
         item: id,
         valid: true

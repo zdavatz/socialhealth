@@ -68,13 +68,14 @@
                     <hr />
 
 
+                    {{#if h}}
                     {{#each historyItems}}
                     <h1>
                         <small><strong>{{fullname}} {{keywords}} </strong> - {{moFormat createAt 'dddd, MMMM Do YYYY, h:mm:ss a'}} </small>
                     </h1>
        
                     
-                    <!-- {{getResults _id}} -->
+            
 
                         {{#each getResults _id}}
                             <!-- {{this}} -->
@@ -86,9 +87,10 @@
                         {{/each}}
                     <hr/>
                     {{/each}}
+                    {{/if}}
 
 
-                    {{#if historyx}}
+                    {{#if history}}
                     <div class="">
 
                         {{#each history}}
@@ -108,6 +110,11 @@
                         <!-- No search history -->
                     </p>
                     {{/if}}
+
+
+
+
+                    
                     {{else}}
                     <h3 class="subtitle is-4">Console</h3>
                     <hr />
