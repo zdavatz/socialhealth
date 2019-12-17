@@ -41,7 +41,7 @@ Meteor.methods({
 
         var stats = {}
         stats.profiles = Results.find().count()
-        stats.items = Items.find().count()
+        stats.items = Items.find({surname:{$ne:null}}).count()
 
         return stats
 
