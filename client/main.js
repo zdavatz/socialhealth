@@ -8,7 +8,7 @@ Items = new Mongo.Collection('items');
 Results = new Mongo.Collection('results');
 Template.socialHealth.onCreated(function () {
   // counter starts at 0
-  Meteor.subscribe('history')
+  // Meteor.subscribe('history')
   Tracker.autorun(function(){
     // var operation = Session.get('operationId')
     var operation = App.getSetting('operationId')

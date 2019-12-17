@@ -56,12 +56,11 @@ Meteor.publish('results', function (id) {
  * Publish: History 
  */
 
- Meteor.publish('history',function(){
+ Meteor.publish(null,function(){
     var ids = Items.find({},{limit:40,sort:{createAt:-1}}).fetch()
     var ids = _.map(ids,(id)=>{
         return id._id
     })
-    //
     var results = Results.find({item:{$in:ids}})
     return results;
  })
