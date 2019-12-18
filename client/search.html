@@ -67,6 +67,7 @@
                     <div class="column is-12" style="height: 80px;">
                         <a href="#" class="button setSettings" data-settings="history:true">History</a>
                         <a href="#" class="button setSettings" data-settings="history:false">Console</a>
+                     
                     </div>
                     {{#if getSetting 'history'}}
                     <h3 class="subtitle is-4">History</h3>
@@ -80,6 +81,7 @@
                             {{count}}
                             <strong>{{fullname}}</strong><br/>
                             <small>{{ moFormat this.createAt 'dddd, MMMM Do YYYY, h:mm:ss a'}}</small>
+                            <p><span class="tag is-primary">{{keywords}}</span></p>
                             <br/><br/>
                             {{#each this.results}}
                             <p class="">
