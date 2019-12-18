@@ -5,10 +5,10 @@
                 <div class="column is-12">
                     <span class="title">Social Health Search</span>
 
-                    <span class="is-pulled-right">  
+                    <span class="is-pulled-right">
                         Searches: <span class="tag is-primary5">{{setting 'stats' 'items'}}</span>
                         Profiles: <span class="tag is-info">{{setting 'stats' 'profiles'}}</span>
-                </span>
+                    </span>
                 </div>
                 <div class="column is-10">
                     <form class="field has-addons" id="search">
@@ -48,8 +48,8 @@
                     <div class="column is-12" style="height: 80px;">
                         <br /><br />
                     </div>
-                    <h3 class="subtitle is-4">Results</h3>
-                    <hr />
+                    <!-- <h3 class="subtitle is-4">Results</h3>
+                    <hr /> -->
                     {{#if results}}
                     {{#each results}}
                     <p>
@@ -65,13 +65,15 @@
                 </div>
                 <div class="column is-6">
                     <div class="column is-12" style="height: 80px;">
-                        <a href="#" class="button setSettings" data-settings="history:true">History</a>
-                        <a href="#" class="button setSettings" data-settings="history:false">Console</a>
-                     
+                        <a href="#" class="button setSettings {{#if getSetting 'history'}} is-primary {{/if}}"
+                            data-settings="history:true">History</a>
+                        <a href="#" class="button setSettings {{#unless getSetting 'history'}} is-primary {{/unless}}"
+                            data-settings="history:false">Console</a>
+
                     </div>
                     {{#if getSetting 'history'}}
-                    <h3 class="subtitle is-4">History</h3>
-                    <hr />
+                    <!-- <h3 class="subtitle is-4">History</h3>
+                    <hr /> -->
                     <!--  -->
                     {{#if items}}
 
@@ -80,18 +82,20 @@
                     {{#each items}}
                     <p class="notification ">
                         {{getCount @index}}
-                        <strong><span class="{{#if isAPI}} has-text-danger {{/if}}">{{fullname}}</span></strong > 
-                            {{#if keywords}}<span class="tag is-primary">{{keywords}}</span> {{/if}} <br/>
+                        <strong><span class="{{#if isAPI}} has-text-danger {{/if}}">{{fullname}}</span></strong>
+                        {{#if keywords}}<a href='#' class="setSettings button is-rounded is-small"
+                            data-settings="keywordFilter:{{keywords}}"><span
+                                class=" is-primary">{{keywords}}</span></a>{{/if}} <br />
                         <small>{{ moFormat this.createAt 'dddd, MMMM Do YYYY, h:mm:ss a'}}</small>
                         <br>
 
                         {{> resultsData id=_id}}
                     </p>
-   
-                 
+
+
                     {{/each}}
 
-   <!-- {{@index}} -->
+                    <!-- {{@index}} -->
                     <!-- <ul class="is-hidden">
                         {{#each history}}
                         <ol class="notification is-light">
@@ -111,20 +115,24 @@
                         </ol>
                         {{/each}}
                     </ul> -->
+
+                    <!--  -->
+                    <!--  -->
+
+
                     {{else}}
                     <p class="">
                         No search history
                     </p>
                     {{/if}}
                     {{else}}
-                    <h3 class="subtitle is-4">Console</h3>
-                    <hr />
+                    <!-- <h3 class="subtitle is-4">Console</h3>
+                    <hr /> -->
                     <pre>
                         {{resultsJSON}}
                     </pre>
                     {{/if}}
-                    <!-- <textarea class="textarea" rows="20"> -->
-                    <!-- </textarea> -->
+
                 </div>
             </div>
         </div>
@@ -135,7 +143,7 @@
 <template name="resultsData">
     <!-- {{this.id}} -->
     <!-- {{resultsList}} -->
-    <br/>
+    <br />
     {{#each resultsList}}
     <p class="">
         <a href="{{link}}" target="_blank">{{title}}</a> <br />

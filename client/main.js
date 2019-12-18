@@ -22,6 +22,8 @@ Template.socialHealth.onCreated(function () {
       App.setSetting({stats:data})
     }
   })
+
+  self = this;
 });
 /**
  * 
@@ -107,6 +109,9 @@ Template.socialHealth.helpers({
     // return data
   },
   items(){
+    if(App.getSetting('keywordsFilter')){
+      log('Keyword:Filter',App.getSetting('keywordsFilter'))
+    }
     return Items.find({},{sort:{createAt:-1}})
   },
   getCount(index){

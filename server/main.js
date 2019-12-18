@@ -101,11 +101,11 @@ Meteor.publish('results', function (id) {
   
     // Counting all Search Operations 
     // count:{$exists:false}
-    var items = Items.find({surname:{$ne:null}},{sort:{createAt:1}}).fetch()
-    _.each(items,(item,index)=>{
-        var count = index + 1;
-        Items.update({_id:item._id},{$set:{count: count}})
-    })
+    // var items = Items.find({surname:{$ne:null}},{sort:{createAt:1}}).fetch()
+    // _.each(items,(item,index)=>{
+    //     var count = index + 1;
+    //     Items.update({_id:item._id},{$set:{count: count}})
+    // })
 
     //  Setting The Missing Dates
 
