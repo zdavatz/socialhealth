@@ -98,13 +98,25 @@ Meteor.publish('results', function (id) {
 
 
  Meteor.startup(()=>{
-    //  ,count:{$exists:false}
+  
+    // Counting all Search Operations 
+    // count:{$exists:false}
     var items = Items.find({surname:{$ne:null}},{sort:{createAt:1}}).fetch()
     _.each(items,(item,index)=>{
         var count = 1;
         Items.update({_id:item._id},{$set:{count: index + 1}})
     })
 
+    //  Setting The Missing Dates
+
+    var items = Items.find({surname:{$ne:null}, createAt:{$exists:false}}).fetch()
+    _.each(items,(item)=>{
+        var d = new Date();
+        d.setDate(d.getDate() - _.random(2,10));
+        log('Setting missing dates')
+        var d = d.toDateString()
+        Items.update({_id:item._id},{$set:{createAt: d}})
+    })
  })
 
 
