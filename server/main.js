@@ -98,7 +98,8 @@ Meteor.publish('results', function (id) {
 
 
  Meteor.startup(()=>{
-    var items = Items.find({surname:{$ne:null},count:{$exists:false}},{sort:{createAt:1}}).fetch()
+    //  ,count:{$exists:false}
+    var items = Items.find({surname:{$ne:null}},{sort:{createAt:1}}).fetch()
     _.each(items,(item,index)=>{
         var count = 1;
         Items.update({_id:item._id},{$set:{count: index + 1}})
