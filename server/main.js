@@ -22,7 +22,7 @@ Meteor.methods({
         obj.queries = queryCreate(obj.fullname, obj.keywords)
         obj.createAt = new Date();
 
-        var count = Items.find().count()
+        var count = Items.find({surname:{$ne:null}}).count()
 
         obj.count = count + 1;
 
