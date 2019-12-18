@@ -79,7 +79,7 @@
                         <ol class="notification is-light">
                             <!-- {{@index}} -->
                             {{count}}
-                            <strong>{{fullname}}</strong> <span class="tag is-primary">{{keywords}}</span> <br/>
+                            <strong><span class="{{#if isAPI}}  has-text-primary {{/if}}"></span>{{fullname}}</strong > <span class="tag is-primary">{{keywords}}</span>  <br/>
                             <small>{{ moFormat this.createAt 'dddd, MMMM Do YYYY, h:mm:ss a'}}</small>
                             <!-- <p></p> -->
                             <br/><br/>
