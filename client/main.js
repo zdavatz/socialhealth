@@ -88,26 +88,38 @@ Template.socialHealth.helpers({
    */
   history(){
     var data = []
-    var r = Results.find({},{sort:{createdAt:-1, count: -1}}).fetch()
+    var r = Results.find({},{sort:{createdAt:-1}}).fetch()
     var r = _.groupBy(r,'item')
+
+
     _.each(r, (i,key)=>{
       if(!i || !key){
         return
       }
-      log(i, key)
       var item = Items.findOne(key)
       if(item){
         item.results = i;
         data.push(item)
       }
-
     })
 
     log('Rendered data',data)
     return data
+  },
+  items(){
+    return Items.find({},{sort:{createAt:-1}})
   }
 
 });
 
+/**
+ * 
+ */
 
+Template.resultsData.helpers({
+  resultsList(){
+    var id = this.id
+    return Results.find({item:id}).fetch()
+  }
+})
 

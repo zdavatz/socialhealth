@@ -74,15 +74,33 @@
                     <hr />
                     <!--  -->
                     {{#if history}}
-                    <ul class="">
+
+
+
+                    {{#each items}}
+                    <p class="notification {{#if isAPI}} is-danger {{/if}}">
+                        {{count}}
+                        <strong><span class="{{#if isAPI}} has-text-white {{/if}}">{{fullname}}</span></strong > 
+                            {{#if keywords}}<span class="tag is-primary">{{keywords}}</span> {{/if}} <br/>
+                        <small>{{ moFormat this.createAt 'dddd, MMMM Do YYYY, h:mm:ss a'}}</small>
+                        <br>
+
+                        {{> resultsData id=_id}}
+                    </p>
+   
+                 
+                    {{/each}}
+
+
+                    <ul class="is-hidden">
                         {{#each history}}
                         <ol class="notification is-light">
                             <!-- {{@index}} -->
                             {{count}}
                             <strong><span class="{{#if isAPI}} has-text-danger {{/if}}">{{fullname}}</span></strong > 
-                                <span class="tag is-primary">{{keywords}}</span>  <br/>
+                                {{#if keywords}}<span class="tag is-primary">{{keywords}}</span> {{/if}} <br/>
                             <small>{{ moFormat this.createAt 'dddd, MMMM Do YYYY, h:mm:ss a'}}</small>
-                            {{isAPI}}
+                
                             <!-- <p></p> -->
                             <br/><br/>
                             {{#each this.results}}
@@ -112,4 +130,18 @@
             </div>
         </div>
     </section>
+</template>
+
+
+<template name="resultsData">
+    <!-- {{this.id}} -->
+    <!-- {{resultsList}} -->
+    <br/>
+    {{#each resultsList}}
+    <p class="">
+        <a href="{{link}}" target="_blank">{{title}}</a> <br />
+        <small>{{link}}</small>
+    </p>
+    {{/each}}
+
 </template>
