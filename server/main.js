@@ -21,6 +21,11 @@ Meteor.methods({
         // var keywordsArr = getKeywords(obj.keywords)
         obj.queries = queryCreate(obj.fullname, obj.keywords)
         obj.createAt = new Date();
+
+        var count = Items.find().count()
+
+        obj.count = count + 1;
+
         var itemId = Items.insert(obj)
         if(obj.isAPI){
             log('===== USING API =====')
@@ -76,18 +81,36 @@ Meteor.publish('results', function (id) {
     var results = Results.find({item:{$in:ids}})
     return results;
  })
-
+/**
+ * 
+ */
  Meteor.publish(null,function(){
     var items = Items.find({surname:{$ne:null}},{limit:100,sort:{createAt:-1}})
     return items;
  })
 
- //
 
-//  Results.remove({})
-// Items.remove({})
+ /**
+  * Enumaring Tasks
+  * 
+  *  
+  */
 
 
+ Meteor.startup(()=>{
+    var items = Items.find({surname:{$ne:null},count:{$exists:false}},{sort:{createAt:1}}).fetch()
+    _.each(items,(item,index)=>{
+        var count = 1;
+        Items.update({_id:item._id},{$set:{count: index + 1}})
+    })
+
+ })
+
+
+
+/**
+-- Logging
+*/
 log('Search Results Count',Results.find().count())
 /**
  * 
