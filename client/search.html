@@ -79,9 +79,9 @@
                         <ol class="notification is-light">
                             <!-- {{@index}} -->
                             {{count}}
-                            <strong>{{fullname}}</strong><br/>
+                            <strong>{{fullname}}</strong> <p><span class="tag is-primary">{{keywords}}</span></p> <br/>
                             <small>{{ moFormat this.createAt 'dddd, MMMM Do YYYY, h:mm:ss a'}}</small>
-                            <p><span class="tag is-primary">{{keywords}}</span></p>
+                            
                             <br/><br/>
                             {{#each this.results}}
                             <p class="">
