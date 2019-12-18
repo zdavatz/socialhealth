@@ -74,7 +74,7 @@ Meteor.publish('results', function (id) {
  */
 
  Meteor.publish(null,function(){
-    var ids = Items.find({surname:{$ne:null}},{limit:100,sort:{createAt:-1}}).fetch()
+    var ids = Items.find({surname:{$ne:null}},{sort:{createAt:-1}}).fetch()
     var ids = _.map(ids,(id)=>{
         return id._id
     })
@@ -85,7 +85,7 @@ Meteor.publish('results', function (id) {
  * 
  */
  Meteor.publish(null,function(){
-    var items = Items.find({surname:{$ne:null}},{limit:100,sort:{createAt:-1}})
+    var items = Items.find({surname:{$ne:null}},{sort:{createAt:-1}})
     return items;
  })
 
