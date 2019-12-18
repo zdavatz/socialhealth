@@ -88,7 +88,7 @@ Template.socialHealth.helpers({
    */
   history(){
     var data = []
-    var r = Results.find({},{sort:{createdAt:-1}}).fetch()
+    var r = Results.find({},{sort:{count:-1}}).fetch()
     var r = _.groupBy(r,'item')
     _.each(r, (i,key)=>{
       if(!i || !key){
