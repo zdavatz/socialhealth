@@ -73,14 +73,14 @@
                     <h3 class="subtitle is-4">History</h3>
                     <hr />
                     <!--  -->
-                    {{#if history}}
+                    {{#if items}}
 
 
 
                     {{#each items}}
-                    <p class="notification {{#if isAPI}} is-danger {{/if}}">
-                        {{count}}
-                        <strong><span class="{{#if isAPI}} has-text-white {{/if}}">{{fullname}}</span></strong > 
+                    <p class="notification ">
+                        {{getCount @index}}
+                        <strong><span class="{{#if isAPI}} has-text-danger {{/if}}">{{fullname}}</span></strong > 
                             {{#if keywords}}<span class="tag is-primary">{{keywords}}</span> {{/if}} <br/>
                         <small>{{ moFormat this.createAt 'dddd, MMMM Do YYYY, h:mm:ss a'}}</small>
                         <br>
@@ -91,17 +91,16 @@
                  
                     {{/each}}
 
-
-                    <ul class="is-hidden">
+   <!-- {{@index}} -->
+                    <!-- <ul class="is-hidden">
                         {{#each history}}
                         <ol class="notification is-light">
-                            <!-- {{@index}} -->
+                         
                             {{count}}
                             <strong><span class="{{#if isAPI}} has-text-danger {{/if}}">{{fullname}}</span></strong > 
                                 {{#if keywords}}<span class="tag is-primary">{{keywords}}</span> {{/if}} <br/>
                             <small>{{ moFormat this.createAt 'dddd, MMMM Do YYYY, h:mm:ss a'}}</small>
                 
-                            <!-- <p></p> -->
                             <br/><br/>
                             {{#each this.results}}
                             <p class="">
@@ -111,7 +110,7 @@
                             {{/each}}
                         </ol>
                         {{/each}}
-                    </ul>
+                    </ul> -->
                     {{else}}
                     <p class="">
                         No search history

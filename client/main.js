@@ -87,27 +87,33 @@ Template.socialHealth.helpers({
    * History: results
    */
   history(){
-    var data = []
-    var r = Results.find({},{sort:{createdAt:-1}}).fetch()
-    var r = _.groupBy(r,'item')
+    // var data = []
+    // var r = Results.find({},{sort:{createdAt:-1}}).fetch()
+    // var r = _.groupBy(r,'item')
 
 
-    _.each(r, (i,key)=>{
-      if(!i || !key){
-        return
-      }
-      var item = Items.findOne(key)
-      if(item){
-        item.results = i;
-        data.push(item)
-      }
-    })
+    // _.each(r, (i,key)=>{
+    //   if(!i || !key){
+    //     return
+    //   }
+    //   var item = Items.findOne(key)
+    //   if(item){
+    //     item.results = i;
+    //     data.push(item)
+    //   }
+    // })
 
-    log('Rendered data',data)
-    return data
+    // log('Rendered data',data)
+    // return data
   },
   items(){
     return Items.find({},{sort:{createAt:-1}})
+  },
+  getCount(index){
+    var items =  Items.find({},{sort:{createAt:-1}}).count()
+    var count = items - parseInt(index)
+    // log(count)
+    return count
   }
 
 });
