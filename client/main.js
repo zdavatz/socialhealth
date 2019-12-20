@@ -121,3 +121,12 @@ Template.resultsData.helpers({
   }
 })
 
+/**
+ * 
+ */
+
+Template.registerHelper('mkList', (str) => {
+  var arr = str.split(',');
+  return arr;
+})
+

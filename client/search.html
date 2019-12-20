@@ -88,9 +88,22 @@
                         {{getCount @index}}
                         <strong><span class="{{#if isAPI}} has-text-danger {{/if}}">{{fullname}}</span></strong>
 
-                        {{#if keywords}}<a href='#' class="setSettings button is-rounded is-small"
-                            data-settings="keywordFilter:{{keywords}}"><span
-                                class=" is-primary">{{keywords}}</span></a>{{/if}} 
+                        {{#if keywords}}
+
+                        {{#each mkList keywords}}
+
+                        <a href='#' class="setSettings button is-rounded is-small"
+                        data-settings="keywordFilter:{{this}}"><span
+                            class=" is-primary">{{this}}</span></a>
+
+
+                     
+                        {{/each}}
+                        
+              
+                                
+                                
+                        {{/if}} 
                                 <br />
                         <small>{{ moFormat this.createAt 'dddd, MMMM Do YYYY, h:mm:ss a'}}</small>
                         <br>
