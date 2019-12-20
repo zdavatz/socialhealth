@@ -11,6 +11,7 @@ Results = new Mongo.Collection('results');
  * 
  */
 Template.socialHealth.onCreated(function () {
+  self = this;
   Tracker.autorun(function(){
     var operation = App.getSetting('operationId')
     Meteor.subscribe('results',operation)
@@ -23,7 +24,8 @@ Template.socialHealth.onCreated(function () {
     }
   })
 
-  self = this;
+
+
 });
 /**
  * 
@@ -88,31 +90,16 @@ Template.socialHealth.helpers({
   /**
    * History: results
    */
-  history(){
-    // var data = []
-    // var r = Results.find({},{sort:{createdAt:-1}}).fetch()
-    // var r = _.groupBy(r,'item')
-
-
-    // _.each(r, (i,key)=>{
-    //   if(!i || !key){
-    //     return
-    //   }
-    //   var item = Items.findOne(key)
-    //   if(item){
-    //     item.results = i;
-    //     data.push(item)
-    //   }
-    // })
-
-    // log('Rendered data',data)
-    // return data
-  },
   items(){
-    if(App.getSetting('keywordsFilter')){
-      log('Keyword:Filter',App.getSetting('keywordsFilter'))
+    if(App.getSetting('keywordFilter')){
+  
+      log('Filtering Keywords',App.getSetting('keywordFilter'))
+      var keywords = App.getSetting('keywordFilter')
+      return Items.find({keywords:{$regex: keywords}},{sort:{createAt:-1}})
+    }else{
+      return Items.find({},{sort:{createAt:-1}})
     }
-    return Items.find({},{sort:{createAt:-1}})
+    
   },
   getCount(index){
     var items =  Items.find({},{sort:{createAt:-1}}).count()

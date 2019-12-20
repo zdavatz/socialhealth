@@ -70,55 +70,36 @@
                         <a href="#" class="button setSettings {{#unless getSetting 'history'}} is-primary {{/unless}}"
                             data-settings="history:false">Console</a>
 
+
+                            {{#if getSetting 'keywordFilter'}}
+                            <span class="is-pulled-right ">
+                                <a class="setSettings" data-settings="keywordFilter:f">All</a>
+                            </span>
+                            {{/if}}
+
                     </div>
                     {{#if getSetting 'history'}}
-                    <!-- <h3 class="subtitle is-4">History</h3>
-                    <hr /> -->
-                    <!--  -->
-                    {{#if items}}
 
+                    {{#if items}}
 
 
                     {{#each items}}
                     <p class="notification ">
                         {{getCount @index}}
                         <strong><span class="{{#if isAPI}} has-text-danger {{/if}}">{{fullname}}</span></strong>
+
                         {{#if keywords}}<a href='#' class="setSettings button is-rounded is-small"
                             data-settings="keywordFilter:{{keywords}}"><span
-                                class=" is-primary">{{keywords}}</span></a>{{/if}} <br />
+                                class=" is-primary">{{keywords}}</span></a>{{/if}} 
+                                <br />
                         <small>{{ moFormat this.createAt 'dddd, MMMM Do YYYY, h:mm:ss a'}}</small>
                         <br>
-
+                        <!-- Loop the results -->
                         {{> resultsData id=_id}}
                     </p>
 
 
                     {{/each}}
-
-                    <!-- {{@index}} -->
-                    <!-- <ul class="is-hidden">
-                        {{#each history}}
-                        <ol class="notification is-light">
-                         
-                            {{count}}
-                            <strong><span class="{{#if isAPI}} has-text-danger {{/if}}">{{fullname}}</span></strong > 
-                                {{#if keywords}}<span class="tag is-primary">{{keywords}}</span> {{/if}} <br/>
-                            <small>{{ moFormat this.createAt 'dddd, MMMM Do YYYY, h:mm:ss a'}}</small>
-                
-                            <br/><br/>
-                            {{#each this.results}}
-                            <p class="">
-                                <a href="{{link}}" target="_blank">{{title}}</a> <br />
-                                <small>{{link}}</small>
-                            </p>
-                            {{/each}}
-                        </ol>
-                        {{/each}}
-                    </ul> -->
-
-                    <!--  -->
-                    <!--  -->
-
 
                     {{else}}
                     <p class="">
