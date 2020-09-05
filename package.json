@@ -16,7 +16,7 @@
     "google-search-scraper": "^0.1.0",
     "lodash": "^4.17.19",
     "meteor-node-stubs": "^0.4.1",
-    "papaparse": "^5.1.0",
+    "papaparse": "^5.2.0",
     "puppeteer": "^2.0.0",
     "yaml": "^1.7.2"
   },
